@@ -26,7 +26,7 @@ $("#characterList A").on("click", function(){
 			.removeClass("winner");
 
 		// show, since this could be hidden on player win
-		$(".opponent,.versus").show(); 
+		$(".opponent,.versus").fadeIn(); 
 
 		// this class add styling to the character list when oponent is empty
 		$("#characterList").addClass("chooseOponents");
@@ -44,7 +44,7 @@ $("#characterList A").on("click", function(){
 			.removeClass("ready");
 
 		// hide their selection from the characterList
-		$(this).parent().hide();
+		$(this).parent().fadeOut();
 
 
 	// is the defender on the ring?
@@ -70,7 +70,7 @@ $("#characterList A").on("click", function(){
 			.addClass("disable");
 
 		// hide their selection from the characterList
-		$(this).parent().hide();
+		$(this).parent().fadeOut();
 
 		// convert the instructions to a button and bind it functionality
 		$("#instructions")
@@ -143,7 +143,7 @@ $("#characterList A").on("click", function(){
 							.addClass("winner")
 							.html(`CONGRATULATIONS <strong>${user.name}</strong> beat all the opponents!<br>
 								Start again by selecting your player above.`);
-						$(".opponent,.versus").hide();
+						$(".opponent,.versus").fadeOut();
 						$(".player").addClass("winner");
 						
 						// RESETS
@@ -163,6 +163,6 @@ function resetGame(){
 	$("#characterList")
 		.removeClass("chooseOponents")
 		.removeClass("disable")
-	$("#characterList :hidden").show();
+	$("#characterList :hidden").fadeIn();
 
 }
