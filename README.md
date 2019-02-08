@@ -1,4 +1,5 @@
 # STAR WARS RPG GAME
+A Star Wars themed RPG game done in jQuery.
 
 Instructions
 ------------------------------
