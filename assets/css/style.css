@@ -3,11 +3,18 @@ HTML, BODY {
     padding: 0;
     margin: 0;
     text-align: center;
+    background: #FEFEFE;
 }
 
 * { box-sizing: border-box; }
 
-H1 { margin: 20px auto; }
+H1 { 
+    margin: 20px auto; 
+    font-size: 40px; 
+    font-weight: 700;
+}
+
+STRONG { font-weight: 700; }
 
 #characterList {
     list-style: none;
@@ -129,6 +136,7 @@ H1 { margin: 20px auto; }
     vertical-align: middle;
     border: 5px dotted gray;
     border-radius: 10px;
+    background: #FFF;
 }
 
 .theRing .player img,
@@ -143,6 +151,7 @@ H1 { margin: 20px auto; }
 .theRing .opponent span {
     font-weight: bold;
     font-size: 22px;
+    line-height: 1.35em;
 }
 .theRing .player .power,
 .theRing .opponent .power,
@@ -172,6 +181,11 @@ H1 { margin: 20px auto; }
 
 .theRing.ready .opponent.defeated {
      border: 5px dotted red;
+     /* background: url(../images/dead.png) center center no-repeat; */
+     background-size: 70%;
+}
+.theRing.ready .opponent.defeated * {
+     opacity: 0.65;
 }
 
 .theRing .versus {
@@ -181,6 +195,11 @@ H1 { margin: 20px auto; }
     width: 80px;
     text-align: center;
     font-size: 50px;
+    background: none;
+}
+
+#fightLog {
+    line-height: 1.5em;
 }
 
 #instructions.attack {
