@@ -16,9 +16,10 @@ H1 {
 
 STRONG { font-weight: 700; }
 
+/* CHARACTER LISTING */
 #characterList {
     list-style: none;
-    margin: 0 auto;
+    margin: 0 auto 0px;
     padding: 0;
     display: inline-block;
     text-align: center;
@@ -115,16 +116,12 @@ STRONG { font-weight: 700; }
     color: #666;
 }
 
-#instructions {
-    display: inline-block;
-    margin: 30px auto;
-    padding: 10px; 
-    border-radius: 5px;
-    border: 1px solid #000;
-    min-width: 300px;
-}
+/* THE RING AND ACTIVE PLAYERS */
 
-.theRing { padding: 30px 0 0 0; }
+.theRing { 
+    display: block;
+    padding: 30px 0 0 0;
+}
 
 .theRing .player, 
 .theRing .opponent, 
@@ -139,12 +136,16 @@ STRONG { font-weight: 700; }
     background: #FFF;
 }
 
+.theRing.bothDefeated .player *,
+.theRing.bothDefeated .opponent * {
+    opacity: 0.4;
+}
+
 .theRing .player img,
 .theRing .opponent img {
     float: left;
     width: 100%;
     height: auto;
-
 }
 
 .theRing .player span,
@@ -153,6 +154,7 @@ STRONG { font-weight: 700; }
     font-size: 22px;
     line-height: 1.35em;
 }
+
 .theRing .player .power,
 .theRing .opponent .power,
 .theRing .player .health,
@@ -181,10 +183,16 @@ STRONG { font-weight: 700; }
 
 .theRing.ready .opponent.defeated {
      border: 5px dotted red;
-     /* background: url(../images/dead.png) center center no-repeat; */
      background-size: 70%;
 }
 .theRing.ready .opponent.defeated * {
+     opacity: 0.65;
+}
+.theRing.ready .player.defeated {
+     border: 5px dotted red;
+     background-size: 70%;
+}
+.theRing.ready .player.defeated * {
      opacity: 0.65;
 }
 
@@ -198,8 +206,18 @@ STRONG { font-weight: 700; }
     background: none;
 }
 
+/* INSTRUCTIONS AND LOGS */
 #fightLog {
     line-height: 1.5em;
+}
+
+#instructions {
+    display: inline-block;
+    margin: 30px auto;
+    padding: 10px; 
+    border-radius: 5px;
+    border: 1px solid #000;
+    min-width: 300px;
 }
 
 #instructions.attack {

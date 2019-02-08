@@ -22,6 +22,7 @@ $("#characterList A").on("click", function(){
 		// put the player to the ring and remove classes added from previous rounds
 		$(".player")
 			.html(character)
+			.removeClass("defeated")
 			.removeClass("winner");
 
 		// show, since this could be hidden on player win
@@ -29,7 +30,7 @@ $("#characterList A").on("click", function(){
 
 		// this class add styling to the character list when oponent is empty
 		$("#characterList").addClass("chooseOponents");
-		
+
 		// add instructions to the player and remove classes added from previous rounds
 		$("#instructions")
 			.html("Choose the Defender!")
@@ -37,6 +38,10 @@ $("#characterList A").on("click", function(){
 
 		// empty previous logs and oponent
 		$(".opponent,#fightLog").empty();
+
+		$(".theRing")
+			.removeClass("bothDefeated")
+			.removeClass("ready");
 
 		// hide their selection from the characterList
 		$(this).parent().hide();
@@ -103,12 +108,16 @@ $("#characterList A").on("click", function(){
 					if(defender.health <= 0){
 						$("#instructions")
 							.html(`Game over! <strong>${user.name}</strong> and <strong>${defender.name}</strong> killed each other!<br>Start again by selecting your character.`);
-		
+						$(".theRing")
+							.addClass("bothDefeated")
+							.removeClass("ready");
 					} else {
 
 						$("#instructions")
 							.html(`Game over! <strong>${defender.name}</strong> defeated you!<br>
 								Start again by selecting your player above.`);
+						$(".player").addClass("defeated");
+
 					}
 
 					// RESETS
@@ -141,11 +150,8 @@ $("#characterList A").on("click", function(){
 						resetGame();
 						
 					}
-				
 				} 				
-
 			});
-
 	}
 	return false;
 });
@@ -153,8 +159,7 @@ $("#characterList A").on("click", function(){
 
 function resetGame(){
 	user = {};
-	defender = {};
-	$(".theRing").removeClass("ready");
+	defender = {};	
 	$("#characterList")
 		.removeClass("chooseOponents")
 		.removeClass("disable")
