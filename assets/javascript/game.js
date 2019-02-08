@@ -2,14 +2,18 @@
 var user = {}; // the user's character
 var defender = {} // the defender character
 var resetCharacters = $("#characterList").html();
+var n; // level of the user
 
 $("#characterList A").on("click", function(){
 	
 	// grab the current character
 	var character = $(this).html();
-	
+
 	// is the player on the ring?
 	if($(".player").html() == "" || Object.keys(user).length === 0){
+		
+		n = 1;
+
 		user.name = $(this).attr('data-name');
 		user.health = $(this).attr('data-health');
 		user.power = $(this).attr('data-power');
@@ -33,9 +37,11 @@ $("#characterList A").on("click", function(){
 			.removeClass("chooseOponents")
 			.addClass("disable");
 		
+		$(".opponent").removeClass("defeated");
+
 		$(this).parent().hide();
 
-		var n = 1;
+		
 
 		$("#instructions")
 			.html("Click here to Attack!")
@@ -48,10 +54,10 @@ $("#characterList A").on("click", function(){
 				$("#fightLog").html(`
 					<br>
 					<strong>${user.name}</strong> attacks <strong>${defender.name}</strong> for ${user.power*n++}.<br>
-					<strong>${defender.name}</strong> counter-attacks <strong>${user.name}</strong> for ${user.counter}.
+					<strong>${defender.name}</strong> counter-attacks <strong>${user.name}</strong> for ${defender.counter}.
 				`);
 
-				user.health -= user.counter;
+				user.health -= defender.counter;
 				defender.health -= user.power*n;
 
 				$(".player .health").html(`Health: ${user.health}`);
@@ -60,10 +66,18 @@ $("#characterList A").on("click", function(){
 				if(user.health <= 0){
 
 					$("#instructions")
-						.removeClass("attack")
-						.unbind("click")
-						.html(`Game over! ${defender.name} defeated you!<br>Start again by selecting your character.`);
+							.removeClass("attack")
+							.unbind("click");
 
+					if(defender.health <= 0){
+						$("#instructions")
+							.html(`Game over! <strong>${user.name}</strong> and <strong>${defender.name}</strong> killed each other!<br>Start again by selecting your character.`);
+
+					} else {
+
+						$("#instructions")
+							.html(`Game over! <strong>${defender.name}</strong> defeated you!<br>Start again by selecting your character.`);
+					}
 					user = {};
 					defender = {};
 					$(".theRing").removeClass("ready");
@@ -78,11 +92,23 @@ $("#characterList A").on("click", function(){
 					$("#instructions")
 						.removeClass("attack")
 						.unbind("click")
-						.html(`You won! ${defender.name} is defeated!<br>Choose another opponent!`);
+						.html(`You won! <strong>${defender.name}</strong> is defeated!<br>Choose another opponent!`);
 
 					defender = {};
 
+					$(".opponent").addClass("defeated");
+
 					$("#characterList").addClass("chooseOponents").removeClass("disable");
+
+					if($("#characterList li:visible").length === 0){
+						$("#instructions")
+							.addClass("winner")
+							.html(`CONGRATULATIONS <strong>${user.name}</strong> beat all the opponents!`);
+						$(".opponent,.versus").hide();
+						$(".player").addClass("winner");
+					}
+
+					
 
 				
 				} 		
