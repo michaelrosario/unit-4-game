@@ -10,4 +10,6 @@ Instructions
 Each character has an attack power which increases per attack.  
 The defender will automatically counter-attack you with their counter-attack power.
 
-Enjoy!
+<hr>
+Play the Star Wars game:
+https://michaelrosario.github.io/unit-4-game/
